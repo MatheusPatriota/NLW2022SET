@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, View } from "react-native";
+import { FlatList, Image, View } from "react-native";
 
 import { styles } from "./styles";
 
@@ -16,9 +16,14 @@ export function Home() {
         title="Encontre seu Duo"
         subtitle="Selecione o Jogo que deseja jogar"
       />
-      {GAMES.map((game) => (
-        <GameCard key={game.id} data={game} />
-      ))}
+      <FlatList
+        data={GAMES}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => <GameCard data={item} />}
+        showsHorizontalScrollIndicator={false}
+        horizontal
+        contentContainerStyle={styles.contentList}
+      />
     </View>
   );
 }
